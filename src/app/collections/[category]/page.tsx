@@ -24,7 +24,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Slider } from '@/components/ui/slider';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, use } from 'react';
 import type { Product } from '@/lib/types';
 import { useDebounce } from 'react-use';
 
@@ -34,8 +34,8 @@ const materials = ['Gold', 'Silver', 'Rose Gold'];
 const stones = ['Diamond', 'Ruby', 'Emerald', 'Pearl', 'Sapphire'];
 const styles = ['Solitaire', 'Pendant', 'Stud', 'Bangle', 'Chain', 'Choker', 'Vintage', 'Hoop', 'Charm'];
 
-export default function CollectionsPage({ params }: { params: { category: string } }) {
-  const { category: categorySlug } = params;
+export default function CollectionsPage({ params }: { params: Promise<{ category: string }> }) {
+  const { category: categorySlug } = use(params);
 
   const isAllCollections = categorySlug === 'all';
   const isNewArrivals = categorySlug === 'new-arrivals';
