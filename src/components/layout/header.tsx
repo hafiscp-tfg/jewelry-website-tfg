@@ -6,8 +6,26 @@ import {
   SheetContent,
   SheetTrigger,
   SheetClose,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
 } from '@/components/ui/sheet';
 import { Icons } from '@/components/icons';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
+} from '@/components/ui/dropdown-menu';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { Input } from '../ui/input';
 
 const navLinks = [
   { href: '/collections/all', label: 'Collections' },
@@ -85,15 +103,62 @@ export function Header() {
         </div>
 
         <div className="flex flex-1 items-center justify-end space-x-1">
-          <Button variant="ghost" size="icon" aria-label="Search">
-            <Search className="h-5 w-5" />
-          </Button>
-          <Button variant="ghost" size="icon" aria-label="Account">
-            <User className="h-5 w-5" />
-          </Button>
-          <Button variant="ghost" size="icon" aria-label="Shopping Bag">
-            <ShoppingBag className="h-5 w-5" />
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="ghost" size="icon" aria-label="Search">
+                <Search className="h-5 w-5" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Search Products</DialogTitle>
+              </DialogHeader>
+              <div className="relative">
+                <Input placeholder="Search for jewelry..." className="pr-10" />
+                <Search className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+              </div>
+            </DialogContent>
+          </Dialog>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" aria-label="Account">
+                <User className="h-5 w-5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem asChild>
+                <Link href="/login">Sign In</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/signup">Create Account</Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>My Account</DropdownMenuItem>
+              <DropdownMenuItem>My Wishlist</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" aria-label="Shopping Bag">
+                <ShoppingBag className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent>
+              <SheetHeader>
+                <SheetTitle>Your Shopping Bag</SheetTitle>
+                <SheetDescription>
+                  Your cart is currently empty.
+                </SheetDescription>
+              </SheetHeader>
+              <div className="mt-8">
+                <Button className="w-full" asChild>
+                  <Link href="/collections/all">Continue Shopping</Link>
+                </Button>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </header>
