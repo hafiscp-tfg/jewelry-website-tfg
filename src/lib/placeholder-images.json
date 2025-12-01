@@ -185,6 +185,36 @@
       "description": "Product shown to scale",
       "imageUrl": "https://images.unsplash.com/photo-1754496763272-68b603667cab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxqZXdlbHJ5JTIwc2NhbGV8ZW58MHx8fHwxNzY0NTc4OTg5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "jewelry scale"
+    },
+    {
+      "id": "about-hero",
+      "description": "Close-up of a hand adorned with an elegant, sparkling ring against a dark, moody background.",
+      "imageUrl": "https://images.unsplash.com/photo-1620673399321-9599d14a433f?q=80&w=2070&auto=format&fit=crop",
+      "imageHint": "sparkling ring"
+    },
+    {
+      "id": "about-legacy",
+      "description": "A vintage black and white photo of a jewelry designer's workbench with tools and sketches.",
+      "imageUrl": "https://images.unsplash.com/photo-1570747493158-9a94709f8742?q=80&w=1964&auto=format&fit=crop",
+      "imageHint": "vintage workbench"
+    },
+    {
+      "id": "about-founder",
+      "description": "Softly lit portrait of Elara Vance, a woman with kind eyes and elegant style.",
+      "imageUrl": "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop",
+      "imageHint": "elegant woman"
+    },
+    {
+      "id": "about-goldsmith",
+      "description": "Portrait of Julian Reyes, a man with a focused expression, examining a gemstone.",
+      "imageUrl": "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?q=80&w=2070&auto=format&fit=crop",
+      "imageHint": "man examining"
+    },
+    {
+      "id": "about-gemologist",
+      "description": "Portrait of Sofia Chen, a smiling woman working on a intricate necklace design on her computer.",
+      "imageUrl": "https://images.unsplash.com/photo-1554151228-14d9def656e4?q=80&w=1972&auto=format&fit=crop",
+      "imageHint": "smiling woman"
     }
   ]
 }
