@@ -7,9 +7,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { ArrowLeft, Lock } from 'lucide-react';
+import { ArrowLeft, Lock, Loader2, CheckCircle, CreditCard, Landmark } from 'lucide-react';
 import { Icons } from '@/components/icons';
 import { useCurrency } from '@/contexts/currency-context';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import React from 'react';
 
 const getImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
@@ -20,6 +22,28 @@ export default function CheckoutPage() {
   // Rough shipping cost, assuming $15 USD is the base
   const shipping = subtotal > 0 ? (currency === 'INR' ? 15 * 83 : 15) : 0;
   const total = subtotal + shipping;
+  
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [paymentStep, setPaymentStep] = React.useState<'options' | 'loading' | 'success'>('options');
+  
+  const handlePaymentSubmit = () => {
+    setIsModalOpen(true);
+    setPaymentStep('options');
+  };
+  
+  const handlePaymentMethodSelection = () => {
+    setPaymentStep('loading');
+    setTimeout(() => {
+      setPaymentStep('success');
+    }, 2000); // Simulate transaction time
+  };
+
+  const UpiIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6">
+      <path d="M4 4h16v1h-8v1h8v1h-8v1h8v1h-8v1h8v1h-8v1h8v1h-8v1h8v1h-8v1h8V4z"/>
+      <path d="M4 14h1v6h-1zM6 14h1v6h-1zM8 14h1v6h-1zM10 14h1v6h-1zM12 14h1v6h-1zM14 14h1v6h-1zM16 14h1v6h-1zM18 14h1v6h-1zM20 14h1v6h-1z"/>
+    </svg>
+  );
 
   return (
     <div className="min-h-screen">
@@ -90,7 +114,7 @@ export default function CheckoutPage() {
                 <ArrowLeft className="h-4 w-4" />
                 <span>Return to cart</span>
               </Link>
-              <Button size="lg" className="w-full sm:w-auto">Continue to Payment</Button>
+              <Button size="lg" className="w-full sm:w-auto" onClick={handlePaymentSubmit}>Continue to Payment</Button>
             </div>
           </main>
           <aside className="w-full border-b py-8 lg:w-1/2 lg:border-b-0 lg:border-l lg:py-16 lg:pl-12">
@@ -140,6 +164,48 @@ export default function CheckoutPage() {
           </aside>
         </div>
       </div>
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>
+              {paymentStep === 'options' && 'Select Payment Method'}
+              {paymentStep === 'loading' && 'Processing Payment'}
+              {paymentStep === 'success' && 'Payment Successful'}
+            </DialogTitle>
+            <DialogDescription>
+               {paymentStep === 'options' && 'Choose your preferred way to pay.'}
+               {paymentStep === 'loading' && 'Please wait while we process your transaction...'}
+               {paymentStep === 'success' && 'Thank you for your purchase!'}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="py-4">
+            {paymentStep === 'options' && (
+              <div className="space-y-4">
+                <Button className="w-full justify-start gap-4" size="lg" variant="outline" onClick={handlePaymentMethodSelection}>
+                  <CreditCard /> Credit Card
+                </Button>
+                <Button className="w-full justify-start gap-4" size="lg" variant="outline" onClick={handlePaymentMethodSelection}>
+                  <Landmark /> Debit Card
+                </Button>
+                <Button className="w-full justify-start gap-4" size="lg" variant="outline" onClick={handlePaymentMethodSelection}>
+                  <UpiIcon /> UPI
+                </Button>
+              </div>
+            )}
+            {paymentStep === 'loading' && (
+              <div className="flex flex-col items-center justify-center gap-4 text-center">
+                <Loader2 className="h-16 w-16 animate-spin text-primary" />
+              </div>
+            )}
+            {paymentStep === 'success' && (
+              <div className="flex flex-col items-center justify-center gap-4 text-center">
+                <CheckCircle className="h-16 w-16 text-green-500" />
+                 <Button asChild onClick={() => setIsModalOpen(false)}><Link href="/collections/all">Continue Shopping</Link></Button>
+              </div>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
       <footer className="mt-12 w-full border-t bg-background">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-6 sm:flex-row lg:px-8">
             <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
