@@ -10,9 +10,7 @@ import {
 import { Icons } from '@/components/icons';
 
 const navLinks = [
-  { href: '/collections/rings', label: 'Rings' },
-  { href: '/collections/necklaces', label: 'Necklaces' },
-  { href: '/collections/bracelets', label: 'Bracelets' },
+  { href: '/collections/all', label: 'Collections' },
   { href: '/collections/new-arrivals', label: 'New Arrivals' },
   { href: '/gift-finder', label: 'Gift Finder' },
   { href: '/about', label: 'About' },
