@@ -80,7 +80,7 @@ export default function AboutPage() {
 
       {/* Brand Story Section */}
       <section className="grid grid-cols-1 items-center gap-8 py-16 md:grid-cols-2 md:gap-12 lg:py-24">
-        <div className="flex flex-col gap-4 text-center md:text-left">
+        <div className="flex flex-col gap-4 text-center">
           <h2 className="font-headline text-3xl font-bold leading-tight tracking-tight">From a Dream to a Legacy</h2>
           <p className="text-base font-normal leading-relaxed text-muted-foreground">
             Founded in 1985 by visionary designer Elara Vance, Auria by TFG began in a small, sunlit studio with a simple mission: to create pieces that were not just accessories, but heirlooms. This narrative about the brand's origins, inspiration, and evolution over time is a testament to our dedication to timeless beauty.
