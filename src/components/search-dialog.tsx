@@ -18,6 +18,7 @@ import { products } from '@/lib/data';
 import type { Product } from '@/lib/types';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { ScrollArea } from './ui/scroll-area';
+import { useCurrency } from '@/contexts/currency-context';
 
 const getImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
@@ -25,6 +26,7 @@ export function SearchDialog() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<Product[]>([]);
+  const { formatPrice } = useCurrency();
 
   useEffect(() => {
     if (query.length > 1) {
@@ -93,7 +95,7 @@ export function SearchDialog() {
                     )}
                     <div>
                       <p className="font-semibold">{product.name}</p>
-                      <p className="text-sm text-muted-foreground">${product.price.toLocaleString()}</p>
+                      <p className="text-sm text-muted-foreground">{formatPrice(product.price)}</p>
                     </div>
                   </Link>
                 );

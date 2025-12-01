@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { useCurrency } from '@/contexts/currency-context';
 
 interface ProductCardProps {
   product: Product;
@@ -16,6 +17,7 @@ const getImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
 export function ProductCard({ product, className }: ProductCardProps) {
   const productImage = getImage(product.images[0].id);
+  const { formatPrice } = useCurrency();
 
   return (
     <div className={cn('group relative', className)}>
@@ -57,7 +59,7 @@ export function ProductCard({ product, className }: ProductCardProps) {
             <p className="mt-1 text-sm text-muted-foreground">{product.material}</p>
           </div>
           <p className="text-sm font-medium text-foreground">
-            ${product.price.toLocaleString()}
+            {formatPrice(product.price)}
           </p>
         </div>
       </Link>

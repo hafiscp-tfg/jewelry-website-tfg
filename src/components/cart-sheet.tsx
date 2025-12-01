@@ -17,11 +17,13 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { useCurrency } from '@/contexts/currency-context';
 
 const getImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
 export function CartSheet() {
   const { state, removeFromCart, updateQuantity } = useCart();
+  const { formatPrice } = useCurrency();
   const itemCount = state.items.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = state.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -62,7 +64,7 @@ export function CartSheet() {
                         <div className="flex flex-1 flex-col gap-1">
                             <div className="flex justify-between">
                                 <h3 className="font-medium">{item.name}</h3>
-                                <p className="font-medium">${(item.price * item.quantity).toLocaleString()}</p>
+                                <p className="font-medium">{formatPrice(item.price * item.quantity)}</p>
                             </div>
                             <p className="text-sm text-muted-foreground">{item.material}</p>
                             <div className="flex items-center justify-between pt-2">
@@ -85,7 +87,7 @@ export function CartSheet() {
               <div className="flex w-full flex-col gap-4">
                 <div className="flex justify-between text-lg font-semibold">
                   <span>Subtotal</span>
-                  <span>${subtotal.toLocaleString()}</span>
+                  <span>{formatPrice(subtotal)}</span>
                 </div>
                 <p className="text-center text-sm text-muted-foreground">Shipping & taxes calculated at checkout.</p>
                 <SheetClose asChild>

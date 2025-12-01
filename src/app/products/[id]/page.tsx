@@ -15,6 +15,7 @@ import { ProductCard } from '@/components/product-card';
 import { useToast } from '@/hooks/use-toast';
 import type { Product, Testimonial } from '@/lib/types';
 import { useCart } from '@/contexts/cart-context';
+import { useCurrency } from '@/contexts/currency-context';
 
 const getImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
@@ -73,6 +74,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
   const { toast } = useToast();
   const { addToCart } = useCart();
+  const { formatPrice } = useCurrency();
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
 
@@ -108,7 +110,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
         <div className="flex flex-col gap-6">
           <div>
             <h1 className="font-headline text-3xl font-bold tracking-tight lg:text-4xl">{product.name}</h1>
-            <p className="mt-2 text-2xl text-muted-foreground">${product.price.toLocaleString()}</p>
+            <p className="mt-2 text-2xl text-muted-foreground">{formatPrice(product.price)}</p>
             <div className="mt-4 flex items-center gap-2">
               <div className="flex items-center text-primary">
                 <Star className="h-5 w-5 fill-current" />

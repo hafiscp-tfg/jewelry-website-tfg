@@ -9,13 +9,16 @@ import { Label } from '@/components/ui/label';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { ArrowLeft, Lock } from 'lucide-react';
 import { Icons } from '@/components/icons';
+import { useCurrency } from '@/contexts/currency-context';
 
 const getImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
 export default function CheckoutPage() {
   const { state } = useCart();
+  const { formatPrice, currency } = useCurrency();
   const subtotal = state.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const shipping = subtotal > 0 ? 15 : 0;
+  // Rough shipping cost, assuming $15 USD is the base
+  const shipping = subtotal > 0 ? (currency === 'INR' ? 15 * 83 : 15) : 0;
   const total = subtotal + shipping;
 
   return (
@@ -106,7 +109,7 @@ export default function CheckoutPage() {
                                 <div>
                                     <div className="flex justify-between text-base font-medium">
                                         <h3>{item.name}</h3>
-                                        <p className="ml-4">${(item.price * item.quantity).toLocaleString()}</p>
+                                        <p className="ml-4">{formatPrice(item.price * item.quantity)}</p>
                                     </div>
                                     <p className="mt-1 text-sm text-muted-foreground">{item.material}</p>
                                 </div>
@@ -122,15 +125,15 @@ export default function CheckoutPage() {
                 </div>
                 <div className="flex justify-between text-base text-muted-foreground">
                   <p>Subtotal</p>
-                  <p>${subtotal.toLocaleString()}</p>
+                  <p>{formatPrice(subtotal)}</p>
                 </div>
                 <div className="flex justify-between text-base text-muted-foreground">
                   <p>Shipping</p>
-                  <p>${shipping.toLocaleString()}</p>
+                  <p>{formatPrice(shipping)}</p>
                 </div>
                 <div className="flex justify-between text-lg font-bold">
                   <p>Total</p>
-                  <p>${total.toLocaleString()}</p>
+                  <p>{formatPrice(total)}</p>
                 </div>
               </div>
             </div>

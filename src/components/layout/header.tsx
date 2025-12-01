@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, Search, ShoppingBag, User } from 'lucide-react';
+import { Menu, Search, ShoppingBag, User, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -16,9 +16,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuLabel,
 } from '@/components/ui/dropdown-menu';
 import { SearchDialog } from '@/components/search-dialog';
 import { CartSheet } from '@/components/cart-sheet';
+import { useCurrency } from '@/contexts/currency-context';
 
 const navLinks = [
   { href: '/collections/all', label: 'Collections' },
@@ -28,6 +32,7 @@ const navLinks = [
 ];
 
 export function Header() {
+  const { currency, setCurrency } = useCurrency();
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur-sm">
       <div className="container flex h-16 items-center">
@@ -97,6 +102,21 @@ export function Header() {
 
         <div className="flex flex-1 items-center justify-end space-x-1">
           <SearchDialog />
+          
+           <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" aria-label="Select Currency">
+                <Globe className="h-5 w-5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Currency</DropdownMenuLabel>
+              <DropdownMenuRadioGroup value={currency} onValueChange={(value) => setCurrency(value as 'USD' | 'INR')}>
+                <DropdownMenuRadioItem value="USD">USD</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="INR">INR</DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

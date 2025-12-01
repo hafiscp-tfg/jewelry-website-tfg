@@ -7,11 +7,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Trash2, Plus, Minus, ArrowLeft } from 'lucide-react';
+import { useCurrency } from '@/contexts/currency-context';
 
 const getImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
 export default function CartPage() {
   const { state, removeFromCart, updateQuantity } = useCart();
+  const { formatPrice } = useCurrency();
   const subtotal = state.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
@@ -47,7 +49,7 @@ export default function CartPage() {
                               <p className="font-medium">{item.name}</p>
                               <p className="text-sm text-muted-foreground">{item.material}, {item.style}</p>
                             </div>
-                            <p className="font-medium">${(item.price * item.quantity).toLocaleString()}</p>
+                            <p className="font-medium">{formatPrice(item.price * item.quantity)}</p>
                           </div>
                           <div className="mt-2 flex items-center justify-between">
                             <div className="flex items-center rounded-full border">
@@ -78,7 +80,7 @@ export default function CartPage() {
                 <div className="space-y-4">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">Subtotal</span>
-                    <span className="font-medium">${subtotal.toLocaleString()}</span>
+                    <span className="font-medium">{formatPrice(subtotal)}</span>
                   </div>
                   <div className="text-center text-xs text-muted-foreground">
                     Shipping & taxes calculated at checkout.
@@ -86,7 +88,7 @@ export default function CartPage() {
                   <div className="border-t pt-4">
                     <div className="flex justify-between text-base font-bold">
                       <span>Total</span>
-                      <span>${subtotal.toLocaleString()}</span>
+                      <span>{formatPrice(subtotal)}</span>
                     </div>
                   </div>
                   <div className="pt-4">
