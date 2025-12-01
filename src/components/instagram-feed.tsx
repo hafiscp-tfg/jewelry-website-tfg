@@ -15,7 +15,7 @@ export function InstagramFeed() {
     <section className="py-16 sm:py-24">
       <div className="container text-center">
         <h2 className="font-headline text-3xl font-bold tracking-tight">Follow Our Story</h2>
-        <p className="mt-2 text-lg text-primary">@auriajewelry</p>
+        <p className="mt-2 text-lg text-primary">@think_forge_global</p>
         <div className="mt-12 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-6">
           {images.map((image) => image && (
             <Link href="#" key={image.id} className="group relative block overflow-hidden">
