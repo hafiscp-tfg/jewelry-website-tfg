@@ -5,7 +5,7 @@ import { Footer } from '@/components/layout/footer';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Auria',
+  title: 'Auria by TFG',
   description: 'Timeless Elegance, Redefined.',
 };
 

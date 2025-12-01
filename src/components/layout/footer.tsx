@@ -14,7 +14,7 @@ export function Footer() {
           <div className="space-y-8">
             <Link href="/" className="flex items-center space-x-2">
                 <Icons.logo className="h-7 w-7 text-primary" />
-                <span className="font-headline text-xl font-bold">Auria</span>
+                <span className="font-headline text-xl font-bold">Auria by TFG</span>
             </Link>
             <p className="text-sm text-muted-foreground">
               Timeless elegance, ethically sourced and masterfully crafted for life's most precious moments.
@@ -53,7 +53,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-16 border-t pt-8 sm:mt-20 lg:mt-24">
-          <p className="text-xs leading-5 text-muted-foreground">&copy; {new Date().getFullYear()} Auria Jewelry. All rights reserved.</p>
+          <p className="text-xs leading-5 text-muted-foreground">&copy; {new Date().getFullYear()} Auria by TFG. All rights reserved.</p>
         </div>
       </div>
     </footer>

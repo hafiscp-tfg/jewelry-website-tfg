@@ -1,6 +1,6 @@
 'use server';
 /**
- * @fileOverview AI-powered gift recommendation flow for the Auria jewellery store.
+ * @fileOverview AI-powered gift recommendation flow for the Auria by TFG jewellery store.
  *
  * - getGiftRecommendation - A function that takes occasion, recipient, and budget and returns a gift recommendation.
  * - GiftRecommendationInput - The input type for the getGiftRecommendation function.

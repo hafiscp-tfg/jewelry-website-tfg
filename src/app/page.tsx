@@ -107,7 +107,7 @@ export default function Home() {
               <p className="font-body text-sm font-bold uppercase tracking-wide text-primary">Our Story</p>
               <h2 className="mt-4 font-headline text-4xl font-extrabold tracking-tight">Crafted With Passion</h2>
               <p className="mt-4 text-muted-foreground">
-                At Auria, we believe that jewelry is more than an accessory—it's an expression of art and a marker of life's precious moments. Each piece is meticulously designed and handcrafted by our master jewelers, using ethically sourced materials and time-honored techniques to create heirlooms for generations to come.
+                At Auria by TFG, we believe that jewelry is more than an accessory—it's an expression of art and a marker of life's precious moments. Each piece is meticulously designed and handcrafted by our master jewelers, using ethically sourced materials and time-honored techniques to create heirlooms for generations to come.
               </p>
               <div className="mt-8">
                 <Button asChild>

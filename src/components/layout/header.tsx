@@ -42,7 +42,7 @@ export function Header() {
           <Link href="/" className="mr-6 flex items-center space-x-2">
             <Icons.logo className="h-6 w-6 text-primary" />
             <span className="hidden font-headline text-lg font-bold sm:inline-block">
-              Auria
+              Auria by TFG
             </span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
@@ -75,7 +75,7 @@ export function Header() {
               <div className="flex h-full flex-col py-6">
                 <Link href="/" className="mb-8 flex items-center space-x-2">
                   <Icons.logo className="h-6 w-6 text-primary" />
-                  <span className="font-headline text-lg font-bold">Auria</span>
+                  <span className="font-headline text-lg font-bold">Auria by TFG</span>
                 </Link>
                 <nav className="flex flex-col items-start space-y-4 text-lg font-medium">
                   {navLinks.map(({ href, label }) => (
@@ -98,7 +98,7 @@ export function Header() {
         <div className="flex flex-1 justify-center md:hidden">
           <Link href="/" className="flex items-center space-x-2">
             <Icons.logo className="h-6 w-6 text-primary" />
-            <span className="font-headline text-lg font-bold">Auria</span>
+            <span className="font-headline text-lg font-bold">Auria by TFG</span>
           </Link>
         </div>
 
