@@ -31,7 +31,7 @@ export default function Home() {
           />
         )}
         <div className="absolute inset-0 bg-black/30" />
-        <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white p-4">
+        <div className="relative z-10 flex h-full flex-col items-center justify-center p-4 text-center text-white">
           <h1 className="font-headline text-4xl font-bold md:text-6xl">
             Timeless Elegance, Redefined
           </h1>
