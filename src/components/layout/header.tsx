@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { Menu, Search, ShoppingBag, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -18,14 +20,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-import { Input } from '../ui/input';
+import { SearchDialog } from '@/components/search-dialog';
 
 const navLinks = [
   { href: '/collections/all', label: 'Collections' },
@@ -103,22 +98,7 @@ export function Header() {
         </div>
 
         <div className="flex flex-1 items-center justify-end space-x-1">
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label="Search">
-                <Search className="h-5 w-5" />
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
-              <DialogHeader>
-                <DialogTitle>Search Products</DialogTitle>
-              </DialogHeader>
-              <div className="relative">
-                <Input placeholder="Search for jewelry..." className="pr-10" />
-                <Search className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-              </div>
-            </DialogContent>
-          </Dialog>
+          <SearchDialog />
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
