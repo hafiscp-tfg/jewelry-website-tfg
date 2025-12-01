@@ -2,9 +2,9 @@
   "placeholderImages": [
     {
       "id": "hero-1",
-      "description": "Demifine jewelry pieces on display",
-      "imageUrl": "https://images.unsplash.com/photo-1694589233301-b3f8c114e44d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxkZW1pZmluZSUyMGpld2Vscnl8ZW58MHx8fHwxNzI5MTE4NjExfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "demifine jewelry"
+      "description": "Diamond necklace on a black background",
+      "imageUrl": "https://images.unsplash.com/photo-1620950346239-8c9317579133?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxqZXdlbHJ5fGVufDB8fHx8MTcyOTc2NTM4OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "diamond necklace"
     },
     {
       "id": "story-craftsman",
