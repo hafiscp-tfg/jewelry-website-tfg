@@ -38,7 +38,7 @@ const prompt = ai.definePrompt({
 
   Occasion: {{{occasion}}}
   Recipient: {{{recipient}}}
-  Budget: ${{{budget}}} USD
+  Budget: {{{budget}}} USD
 
   Ensure the recommendation aligns with the brand's image of timeless elegance and high-quality craftsmanship. Consider the persona needs.
 `,
