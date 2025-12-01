@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { useState } from 'react';
+import { useState, use } from 'react';
 import { Star, Heart, Truck, Lock, ShieldCheck, Minus, Plus } from 'lucide-react';
 
 import { products, testimonials } from '@/lib/data';
@@ -14,6 +14,7 @@ import { Input } from '@/components/ui/input';
 import { ProductCard } from '@/components/product-card';
 import { useToast } from '@/hooks/use-toast';
 import type { Product, Testimonial } from '@/lib/types';
+import { useCart } from '@/contexts/cart-context';
 
 const getImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
@@ -24,7 +25,9 @@ type ProductPageProps = {
 };
 
 function ProductImageGallery({ product }: { product: Product }) {
-  const mainImage = getImage(product.images[0].id);
+  const [mainImageId, setMainImageId] = useState(product.images[0].id);
+
+  const mainImage = getImage(mainImageId);
   const galleryImages = product.images.slice(0, 4).map(getImage).filter(Boolean);
 
   return (
@@ -38,18 +41,24 @@ function ProductImageGallery({ product }: { product: Product }) {
             fill
             className="object-cover"
             priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         )}
       </div>
       <div className="grid grid-cols-4 gap-4">
-        {galleryImages.map((image, index) => image && (
-          <div key={image.id} className={`relative aspect-square w-full overflow-hidden rounded-md ${index === 0 ? 'border-2 border-primary' : ''}`}>
+        {galleryImages.map((image) => image && (
+          <div 
+            key={image.id} 
+            className={`relative aspect-square w-full overflow-hidden rounded-md cursor-pointer ${mainImageId === image.id ? 'border-2 border-primary' : ''}`}
+            onClick={() => setMainImageId(image.id)}
+          >
             <Image
               src={image.imageUrl}
-              alt={`${product.name} thumbnail ${index + 1}`}
+              alt={`${product.name} thumbnail`}
               data-ai-hint={image.imageHint}
               fill
-              className="cursor-pointer object-cover"
+              className="object-cover"
+              sizes="(max-width: 768px) 25vw, 10vw"
             />
           </div>
         ))}
@@ -58,12 +67,15 @@ function ProductImageGallery({ product }: { product: Product }) {
   );
 }
 
-export default function ProductPage({ params }: ProductPageProps) {
+
+export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
+
   const { toast } = useToast();
+  const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
 
-  const { id } = params;
   const product = products.find((p) => p.id === id);
 
   if (!product) {
@@ -71,6 +83,7 @@ export default function ProductPage({ params }: ProductPageProps) {
   }
   
   const handleAddToCart = () => {
+    addToCart(product, quantity);
     toast({
       title: "Added to Cart",
       description: `${quantity} x ${product.name} has been added to your cart.`,

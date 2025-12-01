@@ -8,9 +8,6 @@ import {
   SheetContent,
   SheetTrigger,
   SheetClose,
-  SheetHeader,
-  SheetTitle,
-  SheetDescription,
 } from '@/components/ui/sheet';
 import { Icons } from '@/components/icons';
 import {
@@ -21,6 +18,7 @@ import {
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 import { SearchDialog } from '@/components/search-dialog';
+import { CartSheet } from '@/components/cart-sheet';
 
 const navLinks = [
   { href: '/collections/all', label: 'Collections' },
@@ -119,26 +117,7 @@ export function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label="Shopping Bag">
-                <ShoppingBag className="h-5 w-5" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent>
-              <SheetHeader>
-                <SheetTitle>Your Shopping Bag</SheetTitle>
-                <SheetDescription>
-                  Your cart is currently empty.
-                </SheetDescription>
-              </SheetHeader>
-              <div className="mt-8">
-                <Button className="w-full" asChild>
-                  <Link href="/collections/all">Continue Shopping</Link>
-                </Button>
-              </div>
-            </SheetContent>
-          </Sheet>
+          <CartSheet />
         </div>
       </div>
     </header>
