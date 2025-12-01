@@ -12,17 +12,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { use } from 'react';
 
 const getImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
 type CollectionsPageProps = {
-  params: {
+  params: Promise<{
     category: string;
-  };
+  }>;
 };
 
 export default function CollectionsPage({ params }: CollectionsPageProps) {
-  const { category: categorySlug } = params;
+  const { category: categorySlug } = use(params);
 
   const isAllCollections = categorySlug === 'all';
   const isNewArrivals = categorySlug === 'new-arrivals';
