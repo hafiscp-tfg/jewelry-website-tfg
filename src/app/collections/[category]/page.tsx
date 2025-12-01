@@ -187,7 +187,7 @@ export default function CollectionsPage({ params }: { params: { category: string
         <p className="mx-auto max-w-lg pb-8 pt-1 text-center text-muted-foreground">{collection.description}</p>
         
         <div className="flex flex-col gap-4 border-y py-3 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-3 overflow-x-auto pb-2 md:pb-0">
+          <div className="flex flex-wrap items-center gap-3 pb-2 md:pb-0">
             <span className="shrink-0 text-sm font-bold flex items-center gap-2"><Filter className="w-4 h-4" />Filter By:</span>
             
             <DropdownMenu>
