@@ -20,17 +20,21 @@ export function ProductCard({ product, className }: ProductCardProps) {
   return (
     <div className={cn('group relative', className)}>
       <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-secondary">
-        {productImage && (
-          <Image
-            src={productImage.imageUrl}
-            alt={product.name}
-            data-ai-hint={productImage.imageHint}
-            fill
-            className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
-          />
-        )}
+        <Link href={`/products/${product.id}`} className="block h-full w-full">
+          {productImage && (
+            <Image
+              src={productImage.imageUrl}
+              alt={product.name}
+              data-ai-hint={productImage.imageHint}
+              fill
+              className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+            />
+          )}
+        </Link>
         <div className="absolute inset-x-0 bottom-12 flex justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <Button variant="secondary" className="shadow-lg">Quick View</Button>
+          <Button asChild variant="secondary" className="shadow-lg">
+            <Link href={`/products/${product.id}`}>Quick View</Link>
+          </Button>
         </div>
         <div className="absolute right-3 top-3">
           <Button
