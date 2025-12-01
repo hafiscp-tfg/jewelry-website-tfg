@@ -42,9 +42,6 @@ export function ProductCard({ product, className }: ProductCardProps) {
             <Heart className="h-4 w-4" />
           </Button>
         </div>
-        {product.isNew && (
-            <Badge className="absolute left-3 top-3">New</Badge>
-        )}
       </div>
       <Link href={`/products/${product.id}`}>
         <div className="mt-4 flex justify-between">
