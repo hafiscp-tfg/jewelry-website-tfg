@@ -16,7 +16,7 @@ import React from 'react';
 const getImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
 
 export default function CheckoutPage() {
-  const { state } = useCart();
+  const { state, clearCart } = useCart();
   const { formatPrice, currency } = useCurrency();
   const subtotal = state.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   // Rough shipping cost, assuming $15 USD is the base
@@ -35,6 +35,7 @@ export default function CheckoutPage() {
     setPaymentStep('loading');
     setTimeout(() => {
       setPaymentStep('success');
+      clearCart();
     }, 2000); // Simulate transaction time
   };
 
