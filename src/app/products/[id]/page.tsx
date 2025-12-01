@@ -21,7 +21,7 @@ type ProductPageProps = {
 
 function ProductImageGallery({ product }: { product: Product }) {
   const mainImage = getImage(product.images[0].id);
-  const galleryImages = product.images.map(getImage).filter(Boolean);
+  const galleryImages = product.images.slice(0, 4).map(getImage).filter(Boolean);
 
   return (
     <div className="flex flex-col gap-4">
