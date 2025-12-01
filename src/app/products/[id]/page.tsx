@@ -1,6 +1,9 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { useState } from 'react';
 import { Star, Heart, Truck, Lock, ShieldCheck, Minus, Plus } from 'lucide-react';
 
 import { products, testimonials } from '@/lib/data';
@@ -9,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Input } from '@/components/ui/input';
 import { ProductCard } from '@/components/product-card';
+import { useToast } from '@/hooks/use-toast';
 import type { Product, Testimonial } from '@/lib/types';
 
 const getImage = (id: string) => PlaceHolderImages.find(img => img.id === id);
@@ -55,11 +59,30 @@ function ProductImageGallery({ product }: { product: Product }) {
 }
 
 export default function ProductPage({ params }: ProductPageProps) {
+  const { toast } = useToast();
+  const [quantity, setQuantity] = useState(1);
+  const [isWishlisted, setIsWishlisted] = useState(false);
+
   const { id } = params;
   const product = products.find((p) => p.id === id);
 
   if (!product) {
     notFound();
+  }
+  
+  const handleAddToCart = () => {
+    toast({
+      title: "Added to Cart",
+      description: `${quantity} x ${product.name} has been added to your cart.`,
+    });
+  };
+  
+  const handleWishlist = () => {
+    setIsWishlisted(!isWishlisted);
+    toast({
+      title: !isWishlisted ? "Added to Wishlist" : "Removed from Wishlist",
+      description: `${product.name} has been ${!isWishlisted ? 'added to' : 'removed from'} your wishlist.`,
+    });
   }
 
   const relatedProducts = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
@@ -90,17 +113,17 @@ export default function ProductPage({ params }: ProductPageProps) {
           <div className="flex items-center gap-4">
              <label htmlFor="quantity" className="text-sm font-bold">Quantity:</label>
              <div className="flex items-center rounded-full border">
-                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full"><Minus className="h-4 w-4" /></Button>
-                <Input id="quantity" type="number" defaultValue="1" min="1" className="h-8 w-12 border-0 bg-transparent p-0 text-center focus-visible:ring-0" />
-                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full"><Plus className="h-4 w-4" /></Button>
+                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full" onClick={() => setQuantity(q => Math.max(1, q - 1))}><Minus className="h-4 w-4" /></Button>
+                <Input id="quantity" type="number" value={quantity} onChange={(e) => setQuantity(parseInt(e.target.value))} min="1" className="h-8 w-12 border-0 bg-transparent p-0 text-center focus-visible:ring-0" />
+                <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full" onClick={() => setQuantity(q => q + 1)}><Plus className="h-4 w-4" /></Button>
              </div>
           </div>
 
 
           <div className="flex flex-col gap-4 sm:flex-row">
-            <Button size="lg" className="flex-1 rounded-full">Add to Cart</Button>
-            <Button size="icon" variant="outline" className="h-12 w-12 rounded-full" aria-label="Add to wishlist">
-              <Heart className="h-5 w-5" />
+            <Button size="lg" className="flex-1 rounded-full" onClick={handleAddToCart}>Add to Cart</Button>
+            <Button size="icon" variant="outline" className="h-12 w-12 rounded-full" aria-label="Add to wishlist" onClick={handleWishlist}>
+              <Heart className={`h-5 w-5 ${isWishlisted ? 'fill-red-500 text-red-500' : ''}`} />
             </Button>
           </div>
           
