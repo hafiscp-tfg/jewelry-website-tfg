@@ -23,7 +23,7 @@ type CurrencyContextType = {
 const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined);
 
 export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
-  const [currency, setCurrencyState] = useState<Currency>('USD');
+  const [currency, setCurrencyState] = useState<Currency>('INR');
 
   const setCurrency = (newCurrency: Currency) => {
     if (exchangeRates[newCurrency]) {
