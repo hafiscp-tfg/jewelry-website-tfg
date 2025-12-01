@@ -48,7 +48,6 @@ const team = [
 
 export default function AboutPage() {
   const heroImage = getImage('about-hero');
-  const legacyImage = getImage('about-legacy');
 
   return (
     <div className="container py-12 sm:py-16">
@@ -79,8 +78,8 @@ export default function AboutPage() {
       </section>
 
       {/* Brand Story Section */}
-      <section className="grid grid-cols-1 items-center gap-8 py-16 md:grid-cols-2 md:gap-12 lg:py-24">
-        <div className="flex flex-col gap-4 text-center">
+      <section className="py-16 lg:py-24">
+        <div className="mx-auto flex max-w-3xl flex-col gap-4 text-center">
           <h2 className="font-headline text-3xl font-bold leading-tight tracking-tight">From a Dream to a Legacy</h2>
           <p className="text-base font-normal leading-relaxed text-muted-foreground">
             Founded in 1985 by visionary designer Elara Vance, Auria by TFG began in a small, sunlit studio with a simple mission: to create pieces that were not just accessories, but heirlooms. This narrative about the brand's origins, inspiration, and evolution over time is a testament to our dedication to timeless beauty.
@@ -88,17 +87,6 @@ export default function AboutPage() {
           <p className="text-base font-normal leading-relaxed text-muted-foreground">
             Each design draws from the raw beauty of nature and the clean lines of modern architecture, creating a unique harmony that has defined our signature style for decades.
           </p>
-        </div>
-        <div className="relative aspect-square w-full overflow-hidden rounded-xl">
-          {legacyImage && (
-            <Image
-              src={legacyImage.imageUrl}
-              alt={legacyImage.description}
-              data-ai-hint={legacyImage.imageHint}
-              fill
-              className="object-cover"
-            />
-          )}
         </div>
       </section>
 
